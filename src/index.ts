@@ -271,3 +271,131 @@ The Value Is true And Type Is boolean
 The Value Is true And Type Is boolean
 Done
 */
+
+// ---------------------------------Data Types- Type Alias----------------------------
+
+// type st = string;
+// let theName: st = "Elzero";
+// theName = "Osama";
+
+// type standnum = string | number;
+// let all: standnum = 10;
+// all = 100;
+// all = "Osama";
+
+// ---------------------------------Advanced Type Alias----------------------------
+
+// type Buttons = {
+//     up: string,
+//     right: string,
+//     down: string,
+//     left: string
+// }
+
+// type Last = Buttons & {
+//     x: boolean
+// }
+
+// function getActions(btns: Last) {
+//     console.log(`Action For Button Up Is ${btns.up}`);
+//     console.log(`Action For Button Right Is ${btns.right}`);
+//     console.log(`Action For Button Down Is ${btns.down}`);
+//     console.log(`Action For Button Left Is ${btns.left}`);
+// }
+
+// // properties of object should be the same name inside type annotation of Buttons or Last
+// getActions({ up: "Jump", right: "Go Right", down: "Go Down", left: "Go Left", x: true });
+
+
+// ---------------------------------Literal Types----------------------------
+// // you can write type of specific number or string not only writing type (string | number | boolean )
+// let ten : 10 = 10; // ok
+// let nine : 9 = 10; // Error
+
+// // you can write what function can return ... here function compare allowed to return only 0 , 1, -1 and we used type alias to give it a name (nums)
+
+// type nums = 0 | 1 | -1; // type alias
+
+// function compare(num1: number, num2: number) : nums { 
+//     if (num1 === num2) {
+//         return 0;
+//     } else if (num1 > num2) {
+//         return 1;
+//     } else {
+//         return -1;
+//     }
+// }
+
+// console.log(compare(20, 20)); // 0
+// console.log(compare(20, 15)); // 1
+// console.log(compare(20, 30)); // -1
+
+// let myNumber: nums = 1;
+
+// -------------------------------------------------Tuple------------------------------------
+/*
+    Data Types
+    - Tuple
+    --- Is Another Sort Of Array Type
+    --- We knows Exactly How Many Elements It Contains
+    --- We Knows Which Types It Contains At Specific Positions
+*/
+
+// let article: readonly [number, string, boolean] = [11, "Title One", true];
+// article = [12, "Title Two", false];
+// // article.push(100); // will not work if readonly
+// console.log(article);
+
+// const [id, title, published] = article;
+// console.log(id);
+// console.log(title);
+// console.log(published);
+
+// -------------------------------------------------Void------------------------------------
+/*
+    Data Types
+    - Void
+    --- Function That Will Return Nothing 
+    --- Function In JavaScript That Not Return A Value Will Show undefined
+    --- undefined is not void
+    ** if you write return; will match void 
+    ** if you write return undefined; will match void if written in function - if you did not write : void TS will considered it as : undefined
+
+    - Never
+    --- Return Type Never Returns
+    --- The Function Doesn't Have A Normal Completion
+    --- It Throws An Error Or Never Finishes Running At All "Infinite Loop"
+    ** TS automatically defect the Error or infinte Loop inside Function Expressions not Function Declerations and give it automatically : never
+    ** if TS automatically give the function : never you can write return but will be unreachable Code
+    ** if you write : never manually you can not write return and will give you an Error
+*/
+
+// function logging(msg: string) : void {
+//     console.log(msg);
+//     return ; 
+//     // return undefined;
+// }
+
+// console.log(logging("Iam A Message"));
+// console.log("Test");
+
+// const fail = (msg: string) => {
+//     throw new Error(msg);
+//     // return 10; // unreachable Code
+// }
+
+// const alwaysLog = function (name: string){ // TS see it as : Never 
+//     while(true) {
+//         console.log(name);
+//     }
+//     // return 10; // 2 Errors => [1]unreachable Code [2]type number is not assigned to type never
+// }
+// function alwaysLog2 (name: string) : never{ // TS see it as : Void
+//     while(true) {
+//         console.log(name);
+//     }
+//     // return 10; // 2 Errors => [1]unreachable Code [2]type number is not assigned to type never
+// }
+
+// alwaysLog("Osama");
+// // console.log("Test"); //unreachable Code because alwaysLog is a function of while loop
