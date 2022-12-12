@@ -805,7 +805,7 @@ Data Types
 //     username: "Elzero",
 //     country: "Egypt",
 //     role: "Mod",
-//     protect: true
+//     protect: true,
 // }
 
 // console.log(user.id);
@@ -954,3 +954,71 @@ interface setting  { // No Error
 // console.log(userOne.salary);
 // console.log(userOne.msg());
 // console.log(userOne.sayMsg());
+
+// --------------------------------Class- Static Members----------------
+/*
+--- Don't Use "name, length, call"
+*/
+
+// class User {
+//     private static created: number = 0;
+//     static getCount() : void {
+//         console.log(`${this.created} Objects Created`);
+//     }
+//     constructor(public username: string) {
+//         User.created++;
+//     }
+// }
+
+// let u1 = new User("Elzero");
+// let u2 = new User("Web");
+// let u3 = new User("School");
+// // console.log(User.created);
+// User.getCount();
+
+// -----------------------------Class- Implement Interface-------------------
+
+/*
+[1] with Class- Implement Interface you can use theme , font , save() and more no problem but not less than theme , font , save()
+
+[2] with Interface with Object you must use theme , font , save() no more or no less
+interface Settings {
+    theme: boolean;
+    font: string;
+    save(): void;
+}
+let obj : Settings = {
+    theme : true,
+    font : "Open Sans",
+    save(){
+        console.log("Saved")
+    },
+    // Update(){ // Error
+    //     console.log("Update")
+    // }
+}
+*/
+// interface Settings {
+//     theme: boolean;
+//     font: string;
+//     save(): void;
+// }
+
+// class User implements Settings {
+//     constructor(public username: string, public theme: boolean, public font: string) {}
+//     save(): void {
+//         console.log(`Saved`);
+//     }
+//     update(): void {
+//         console.log(`Updated`);
+//     }
+// }
+
+// let userOne = new User("Elzero", true, "Open Sans");
+
+// console.log(userOne.username);
+// console.log(userOne.font);
+
+// userOne.save();
+// userOne.update();
+
