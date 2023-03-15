@@ -358,14 +358,15 @@ Done
     --- Function That Will Return Nothing 
     --- Function In JavaScript That Not Return A Value Will Show undefined
     --- undefined is not void
-    ** if you write return; will match void 
-    ** if you write return undefined; will match void if written in function - if you did not write : void TS will considered it as : undefined
+    ** if you write return; will not give you error with function fn(param:string):void {}
+    ** if you write return undefined; will not give you error with function fn(param:string):void {} 
+    ** if you write return undefined; or return; and did not write fn(param:string):void {} TS will considered it as : void
 
     - Never
     --- Return Type Never Returns
     --- The Function Doesn't Have A Normal Completion
     --- It Throws An Error Or Never Finishes Running At All "Infinite Loop"
-    ** TS automatically defect the Error or infinte Loop inside Function Expressions not Function Declerations and give it automatically : never
+    ** TS automatically detect the Error or infinte Loop inside Function Expressions not Function Declerations and give it automatically : never
     ** if TS automatically give the function : never you can write return but will be unreachable Code
     ** if you write : never manually you can not write return and will give you an Error
 */
@@ -390,7 +391,7 @@ Done
 //     }
 //     // return 10; // 2 Errors => [1]unreachable Code [2]type number is not assigned to type never
 // }
-// function alwaysLog2 (name: string) : never{ // TS see it as : Void
+// function alwaysLog2 (name: string) : never{ 
 //     while(true) {
 //         console.log(name);
 //     }
@@ -888,21 +889,25 @@ interface setting  { // No Error
     ------ All Members Of A Class In TypeScript Are Public
     ------ All Public Members Can Be Accessed Anywhere Without Any Restrictions
     --- Private
-    ------ Members Are Visible Only To That Class and it's subclasses And Are Not Accessible Outside The Class
+    ------ Members Are Visible Only To That Class And Are Not Accessible Outside The Class
     --- Protected
-    ------ Same Like Private But Can Be Accessed Using The Deriving Class
+    ------ Same Like Private But Can Be Accessed Using The Deriving Class (it's subclasses)
 
     - TypeScript Is A Layer On Top Of JavaScript
     - It Should Remove All Annotations And Although Access Modifiers "Private For Example"
 */
 
 // class User {
+//     // Access Modifiers
 //     // private username: string;
 //     // protected salary: number;
 //     // public readonly address: string;
 //     msg: () => string;
-//      // if you use Parameters Properties here no need to write it at the begining of class and no need to write this.username = username ...
+//      // if you use Parameters Properties here no need to write it at the begining (Access Modifiers) of class and no need to write this.username = username ...
 //     constructor(private username: string, protected salary: number,public readonly address: string) {
+//         //this.username = username
+//         //this.salary = salary
+//         //this.address = address
 //         this.msg = function () {
 //         return `Hello ${this.username} Your Salary Is ${this.salary}`;
 //         }
@@ -923,6 +928,7 @@ interface setting  { // No Error
 
 
 // class User {
+//     // same like getter and setter method below but this is created automatically by you write click on username and choose "refactor" and then choose "generate get and set acessors"
 //     public get username(): string {
 //         return this._username;
 //     }
@@ -1194,7 +1200,7 @@ let obj : Settings = {
 
 // -------------------------------------Class Abstract Classes And Members--------------------
 /*
-** Abstract Class is a parent class which child classes inherit from it so we do not create instance from Abstract Class
+** Abstract Class is a parent class which child classes inherit from it  so we do not create instance from Abstract Class
 ** Abstract Method means that child Classes should has this Method (you write only the method name at Abstract Class and write what the method do at child class)
 */
 
@@ -1235,11 +1241,11 @@ let obj : Settings = {
     - Polymorphism
     --- Classes Have The Same Methods But Different Implementations
 
+    --- noImplicitOverride (option in tsconfig file to give you Error if you did not write override keyword)
+
     - Method Override
     --- Allowing Child Class To Provide Implementation Of A Method In Parent Class
     --- A Method In Child Class Must Have Same Name As Parent Class
-
-    --- noImplicitOverride (option in tsconfig file to give you Error if you did not write override keyword)
 */
 
 // class Player {
@@ -1254,7 +1260,7 @@ let obj : Settings = {
 //         super(name);
 //     }
 //     override attack(): void {
-//       // super.attack();
+//       // super.attack(); //if you want to inherit attack() from parent class (Player Class)
 //         console.log("Attacking With Spear");
 //         this.spears -= 1;
 //     }
@@ -1279,7 +1285,7 @@ let obj : Settings = {
 
 // ----------------------------------------------Generics-------------------------------
 /*
-** you can write <type> and use it to decide which type of  will be used as parameter of the function and what the type which is the fucntion should return
+** you can write <type> and use it to decide which type of will be used as parameter of the function and what the type which is the fucntion should return
 
     Generics
     - Help Write A Reusable Code
